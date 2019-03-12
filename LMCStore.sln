@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMCStore", "LMCStore\LMCStore.csproj", "{C8A30DD2-5C17-40C9-AA4B-678BB60B4AD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMCStore.Tests", "LMCStore.Tests\LMCStore.Tests.csproj", "{A3171073-4814-4212-BD93-03BC9E9EACCE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8A30DD2-5C17-40C9-AA4B-678BB60B4AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A30DD2-5C17-40C9-AA4B-678BB60B4AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A30DD2-5C17-40C9-AA4B-678BB60B4AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A30DD2-5C17-40C9-AA4B-678BB60B4AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3171073-4814-4212-BD93-03BC9E9EACCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3171073-4814-4212-BD93-03BC9E9EACCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3171073-4814-4212-BD93-03BC9E9EACCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3171073-4814-4212-BD93-03BC9E9EACCE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B779B45C-D969-495C-861B-7F177873A69A}
+	EndGlobalSection
+EndGlobal
