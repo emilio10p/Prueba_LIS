@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LMCStore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,22 +9,27 @@ namespace LMCStore.Controllers
 {
     public class HomeController : Controller
     {
+        private DbModel db = new DbModel();
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
+    
+        public ActionResult Autoparts ()
         {
-            ViewBag.Message = "Your application description page.";
+            var autopart = db.Products.ToList();
 
+            return View(autopart);
+        }
+
+        public ActionResult ViewAutopart (string AutopartName)
+        {
+            ViewBag.AutopartName = AutopartName;
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Areas ()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
