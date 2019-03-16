@@ -1,0 +1,43 @@
+﻿@model LMCStore.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Area1.Area_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area1.Area_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCT_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCT_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCT_REFERENCE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCT_REFERENCE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PRODUCT_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -8,13 +8,16 @@ namespace LMCStore.Models
 
     public partial class Product
     {
+        
         [Key]
         public int PRODUCT_ID { get; set; }
 
         [StringLength(30)]
+        [Display(Name ="Name")]
         public string PRODUCT_NAME { get; set; }
 
         [StringLength(100)]
+        [Display(Name ="Reference")]
         public string PRODUCT_REFERENCE { get; set; }
 
         public int AREA { get; set; }

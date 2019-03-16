@@ -10,107 +10,112 @@ using LMCStore.Models;
 
 namespace LMCStore.Controllers
 {
-    public class AreasController : Controller
+    public class ProductsController : Controller
     {
         private DbModel db = new DbModel();
 
-        // GET: Areas
+        // GET: Products
         public ActionResult Index()
         {
-            return View(db.Areas.OrderBy(c => c.Area_name).ToList());
+            var products = db.Products.Include(c => c.Area1);
+            return View(products.OrderBy(p => p.AREA).ToList());
         }
 
-        // GET: Areas/Details/5
+        // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Area area = db.Areas.Find(id);
-            if (area == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(area);
+            return View(product);
         }
 
-        // GET: Areas/Create
+        // GET: Products/Create
         public ActionResult Create()
         {
+            ViewBag.AREA = new SelectList(db.Areas, "Area_id", "Area_name");
             return View();
         }
 
-        // POST: Areas/Create
+        // POST: Products/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Area_id,Area_name,Area_level")] Area area)
+        public ActionResult Create([Bind(Include = "PRODUCT_ID,PRODUCT_NAME,PRODUCT_REFERENCE,AREA")] Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Areas.Add(area);
+                db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(area);
+            ViewBag.AREA = new SelectList(db.Areas, "Area_id", "Area_name", product.AREA);
+            return View(product);
         }
 
-        // GET: Areas/Edit/5
+        // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Area area = db.Areas.Find(id);
-            if (area == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(area);
+            ViewBag.AREA = new SelectList(db.Areas, "Area_id", "Area_name", product.AREA);
+            return View(product);
         }
 
-        // POST: Areas/Edit/5
+        // POST: Products/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Area_id,Area_name,Area_level")] Area area)
+        public ActionResult Edit([Bind(Include = "PRODUCT_ID,PRODUCT_NAME,PRODUCT_REFERENCE,AREA")] Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(area).State = EntityState.Modified;
+                db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(area);
+            ViewBag.AREA = new SelectList(db.Areas, "Area_id", "Area_name", product.AREA);
+            return View(product);
         }
 
-        // GET: Areas/Delete/5
+        // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Area area = db.Areas.Find(id);
-            if (area == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(area);
+            return View(product);
         }
 
-        // POST: Areas/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Area area = db.Areas.Find(id);
-            db.Areas.Remove(area);
+            Product product = db.Products.Find(id);
+            db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

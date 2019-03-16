@@ -1,0 +1,46 @@
+﻿@model IEnumerable<LMCStore.Models.Product>
+
+@{
+    ViewBag.Title = "Areas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            Area
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Reference
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Area1.Area_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCT_REFERENCE)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PRODUCT_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PRODUCT_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PRODUCT_ID })
+        </td>
+    </tr>
+}
+
+</table>

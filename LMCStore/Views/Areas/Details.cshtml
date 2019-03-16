@@ -29,6 +29,22 @@
 
     </dl>
 </div>
+
+    <h5>Autoparts</h5>
+
+<table class="table-hover table-striped table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Reference</th>
+    </tr>
+    @foreach (var p in Model.Products)
+    {
+        <tr>
+            <td>@p.PRODUCT_NAME</td>
+            <td>@p.PRODUCT_REFERENCE</td>
+        </tr>
+    }
+</table>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Area_id }) |
     @Html.ActionLink("Back to List", "Index")
