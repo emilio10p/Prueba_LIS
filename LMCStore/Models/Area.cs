@@ -18,7 +18,7 @@ namespace LMCStore.Models
         public int Area_id { get; set; }
 
         [StringLength(20)]
-        [Display(Name ="Area")]
+        [Display(Name ="Are")]
         public string Area_name { get; set; }
 
         [Display(Name ="Level")]
