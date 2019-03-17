@@ -10,10 +10,12 @@ using LMCStore.Models;
 
 namespace LMCStore.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private DbModel db = new DbModel();
 
+        [AllowAnonymous]
         // GET: Products
         public ActionResult Index()
         {

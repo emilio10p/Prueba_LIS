@@ -8,6 +8,8 @@ namespace LMCStore
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            //ssl request
+            filters.Add(new RequireHttpsAttribute());
         }
     }
 }

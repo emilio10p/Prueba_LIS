@@ -10,10 +10,12 @@ using LMCStore.Models;
 
 namespace LMCStore.Controllers
 {
+    [Authorize]
     public class AreasController : Controller
     {
         private DbModel db = new DbModel();
 
+        [AllowAnonymous]
         // GET: Areas
         public ActionResult Index()
         {

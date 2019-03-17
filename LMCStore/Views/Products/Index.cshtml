@@ -8,7 +8,10 @@
 <h2>Index</h2>
 
 <p>
+    @if (Request.IsAuthenticated)
+    {
     @Html.ActionLink("Create New", "Create")
+    }
 </p>
 <table class="table table-striped table-hover">
     <tr>
@@ -35,11 +38,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.PRODUCT_REFERENCE)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PRODUCT_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PRODUCT_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PRODUCT_ID })
-        </td>
+        @if (Request.IsAuthenticated)
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PRODUCT_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PRODUCT_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PRODUCT_ID })
+            </td>
+        }
     </tr>
 }
 
