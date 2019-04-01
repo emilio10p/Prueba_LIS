@@ -13,13 +13,24 @@ namespace LMCStore.Controllers
     [Authorize]
     public class AreasController : Controller
     {
-        private DbModel db = new DbModel();
+        //private DbModel db = new DbModel();
+        IMockAreas db;
+
+        public AreasController()
+        {
+            this.db = new IDataAreas();
+        }
+
+        public AreasController(IMockAreas mockDb)
+        {
+            this.db = mockDb;
+        }
 
         [AllowAnonymous]
         // GET: Areas
         public ActionResult Index()
         {
-            return View(db.Areas.OrderBy(c => c.Area_name).ToList());
+            return View("Index",db.Areas.OrderBy(c => c.Area_name).ToList());
         }
 
         // GET: Areas/Details/5
@@ -29,18 +40,19 @@ namespace LMCStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Area area = db.Areas.Find(id);
+            //Area area = db.Areas.Find(id);
+            Area area = db.Areas.SingleOrDefault(c => c.Area_id == id);
             if (area == null)
             {
                 return HttpNotFound();
             }
-            return View(area);
+            return View("Details",area);
         }
 
         // GET: Areas/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: Areas/Create
@@ -52,11 +64,12 @@ namespace LMCStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Areas.Add(area);
-                db.SaveChanges();
+                //db.Areas.Add(area);
+                //db.SaveChanges();
+                db.Save(area);
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Area_id = new SelectList(db.Areas, "Area_id", "Area_name", area.Area_id);
             return View(area);
         }
 
@@ -67,7 +80,8 @@ namespace LMCStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Area area = db.Areas.Find(id);
+            //Area area = db.Areas.Find(id);
+            Area area = db.Areas.SingleOrDefault(c => c.Area_id == id);
             if (area == null)
             {
                 return HttpNotFound();
@@ -84,11 +98,12 @@ namespace LMCStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(area).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(area).State = EntityState.Modified;
+                //db.SaveChanges();
+                db.Save(area);
                 return RedirectToAction("Index");
             }
-            return View(area);
+            return View("Edit",area);
         }
 
         // GET: Areas/Delete/5
@@ -98,7 +113,8 @@ namespace LMCStore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Area area = db.Areas.Find(id);
+            //Area area = db.Areas.Find(id);
+            Area area = db.Areas.SingleOrDefault(c => c.Area_id == id);
             if (area == null)
             {
                 return HttpNotFound();
@@ -111,9 +127,11 @@ namespace LMCStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Area area = db.Areas.Find(id);
-            db.Areas.Remove(area);
-            db.SaveChanges();
+            //Area area = db.Areas.Find(id);
+            Area area = db.Areas.SingleOrDefault(c => c.Area_id == id);
+            //db.Areas.Remove(area);
+            //db.SaveChanges();
+            db.Delete(area);
             return RedirectToAction("Index");
         }
 
