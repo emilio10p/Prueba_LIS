@@ -26,7 +26,7 @@ namespace LMCStore.Tests.Controllers
             areas = new List<Area>
             {
                 new Area{Area_id = 52, Area_name="area one", Area_level=1},
-                new Area{Area_id = 53, Area_name="area two"},
+                new Area{Area_id = 53, Area_name="area two", Area_level=2},
                 new Area{Area_id = 54, Area_name="area three"}
             };
 
