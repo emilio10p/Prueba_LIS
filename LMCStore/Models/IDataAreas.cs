@@ -4,7 +4,7 @@ using LMCStore.Controllers;
 
 namespace LMCStore.Models
 {
-    internal class IDataAreas : IMockAreas
+    public class IDataAreas : IMockAreas
     {
         //db connection
         private DbModel db = new DbModel();

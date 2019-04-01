@@ -70,7 +70,7 @@ namespace LMCStore.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Area_id = new SelectList(db.Areas, "Area_id", "Area_name", area.Area_id);
-            return View(area);
+            return View("Create",area);
         }
 
         // GET: Areas/Edit/5
@@ -86,7 +86,7 @@ namespace LMCStore.Controllers
             {
                 return HttpNotFound();
             }
-            return View(area);
+            return View("Edit",area);
         }
 
         // POST: Areas/Edit/5

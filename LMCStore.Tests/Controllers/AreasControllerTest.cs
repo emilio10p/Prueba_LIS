@@ -27,7 +27,7 @@ namespace LMCStore.Tests.Controllers
             {
                 new Area{Area_id = 52, Area_name="area one", Area_level=1},
                 new Area{Area_id = 53, Area_name="area two", Area_level=2},
-                new Area{Area_id = 54, Area_name="area three"}
+                new Area{Area_id = 54, Area_name="area three", Area_level=3}
             };
 
             //set up and populate the mock
@@ -38,15 +38,51 @@ namespace LMCStore.Tests.Controllers
             controller = new AreasController(mock.Object);
 
         }
+        //[TestMethod]
+        //public void EditSave()
+        //{
+        //    // arrange
+
+        //    // now handled in TestInitialize
+        //    // act
+        //    var results = controller.Edit(52);
+        //    var vewResult = results as ViewResult;
+        //    var area = vewResult.Model as Area;
+
+        //    //var results = (List<Area>)((ViewResult)controller.Edit(52)).Model;
+        //    // assert
+        //    CollectionAssert.AreEqual(areas.OrderBy(p => p.Area_name).ToList(), results);
+        //}
+
         [TestMethod]
-        public void EditSave(Area area)
+        public void EditViewNull()
         {
-            // arrange
-            // now handled in TestInitialize
+            //Act
+            HttpStatusCodeResult p = controller.Edit(52) as HttpStatusCodeResult;
+            //Assert
+            Assert.AreEqual(52, p.StatusCode);
+        }
+
+        [TestMethod]
+        public void EditPostViewBag()
+        {
+
+            //controller.ModelState.AddModelError("Description", "error");
             // act
-            var results = (List<Area>)((ViewResult)controller.Edit(52)).Model;
+            SelectList result = (controller.Edit(areas[0]) as ViewResult).ViewBag.Area_id;
             // assert
-            CollectionAssert.AreEqual(areas.OrderBy(p => p.Area_name).ToList(), results);
+            Assert.AreEqual(52, result.SelectedValue);
+        }
+
+        [TestMethod]
+        public void IndexViewLoads()
+        {
+            //arrange = TestInitialize Method
+
+            //act
+            ViewResult result = controller.Index() as ViewResult;
+            //assert
+            Assert.AreEqual("Index", result.ViewName);
         }
 
         [TestMethod]
@@ -90,16 +126,6 @@ namespace LMCStore.Tests.Controllers
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
-        public void IndexViewLoads()
-        {
-            //arrange = TestInitialize Method
-
-            //act
-            ViewResult result = controller.Index() as ViewResult;
-            //assert
-            Assert.AreEqual("Index", result.ViewName);
-        }
 
         [TestMethod]
         public void CreateViewLoads()
@@ -121,9 +147,12 @@ namespace LMCStore.Tests.Controllers
             //handled on TestInitialized
 
             //act
-            ViewResult result = controller.Create(areas[0]) as ViewResult;
-            //asert
-            Assert.AreEqual("Index", result.ViewName);
+            var result = controller.Create(areas[0]);
+            if (result is ViewResult)
+            {
+                var viewREsult = result as ViewResult;
+                Assert.AreEqual("Index", viewREsult.ViewName);
+            }
         }
 
         [TestMethod]
@@ -134,7 +163,7 @@ namespace LMCStore.Tests.Controllers
             //act
             SelectList result = (controller.Create(areas[0]) as ViewResult).ViewBag.Area_id;
             //asert
-            Assert.AreEqual(52, result);
+            Assert.AreEqual(result, 52);
 
         }
 
@@ -150,17 +179,6 @@ namespace LMCStore.Tests.Controllers
         }
 
         [TestMethod]
-        public void EditPostViewBag()
-        {
-
-            controller.ModelState.AddModelError("Description", "error");
-            // act
-            SelectList result = (controller.Edit(areas[0]) as ViewResult).ViewBag.Area_id;
-            // assert
-            Assert.AreEqual(52, result.SelectedValue);
-        }
-
-        [TestMethod]
 
         public void DetailsViewLoads()
 
@@ -172,12 +190,23 @@ namespace LMCStore.Tests.Controllers
         }
 
         [TestMethod]
+
+        public void EditViewLoads()
+
+        {
+            //Act
+            ViewResult res = controller.Edit(52) as ViewResult;
+            //Assert
+            Assert.AreEqual("Edit", res.ViewName);
+        }
+
+        [TestMethod]
         public void DetailsViewNullId()
         {
             //Act
-            HttpStatusCodeResult res = controller.Details(null) as HttpStatusCodeResult;
+            HttpStatusCodeResult p = controller.Details(null) as HttpStatusCodeResult;
             //Assert
-            Assert.AreEqual(52, res.StatusCode);
+            Assert.AreEqual(400, p.StatusCode);
         }
 
         [TestMethod]
@@ -185,9 +214,9 @@ namespace LMCStore.Tests.Controllers
 
         {
             //Act
-            HttpNotFoundResult res = controller.Details(52) as HttpNotFoundResult;
+            HttpNotFoundResult p = controller.Details(52) as HttpNotFoundResult;
             //Assert
-            Assert.AreEqual(52, res.StatusCode);
+            Assert.AreEqual(52, p.StatusCode);
         }
 
         [TestMethod]
@@ -220,6 +249,16 @@ namespace LMCStore.Tests.Controllers
             // assert
             Assert.AreEqual("Index", resultlist[0].Value);
 
+        }
+
+        [TestMethod]
+        public void CreateRedirectViewLoads()
+        {
+            Area area = new Area { Area_id = 1, Area_name = "Product 1", Area_level = 2};
+
+           RedirectToRouteResult result = controller.Create(area) as RedirectToRouteResult;
+            //assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
         }
     }
 
