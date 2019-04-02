@@ -64,17 +64,6 @@ namespace LMCStore.Tests.Controllers
         }
 
         [TestMethod]
-        public void EditPostViewBag()
-        {
-
-            //controller.ModelState.AddModelError("Description", "error");
-            // act
-            SelectList result = (controller.Edit(areas[0]) as ViewResult).ViewBag.Area_id;
-            // assert
-            Assert.AreEqual(404, result.SelectedValue);
-        }
-
-        [TestMethod]
         public void IndexViewLoads()
         {
             //arrange = TestInitialize Method
@@ -153,18 +142,6 @@ namespace LMCStore.Tests.Controllers
                 var viewREsult = result as ViewResult;
                 Assert.AreEqual("Index", viewREsult.ViewName);
             }
-        }
-
-        [TestMethod]
-        public void IndexViewBag()
-        {
-            //handled on TestInitialize
-
-            //act
-            SelectList result = (controller.Create(areas[0]) as ViewResult).ViewBag.Area_id;
-            //asert
-            Assert.AreEqual(result, 404);
-
         }
 
         [TestMethod]
