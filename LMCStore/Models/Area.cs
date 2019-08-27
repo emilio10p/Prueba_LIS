@@ -17,12 +17,13 @@ namespace LMCStore.Models
         [Key]
         public int Area_id { get; set; }
 
-        [StringLength(20)]
-        [Display(Name ="Area")]
+        [StringLength(100)]
+        [Display(Name ="Examen")]
         public string Area_name { get; set; }
 
-        [Display(Name ="Level")]
-        public int? Area_level { get; set; }
+        [StringLength(200)]
+        [Display(Name ="Descripcion")]
+        public string Area_level { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
