@@ -19,7 +19,7 @@ namespace LMCStore.Models
 
         public void Dispose()
         {
-            db.Dispose();
+            db.Dispose()
         }
 
         public Area Save(Area area)
